@@ -13,7 +13,7 @@ export class AppComponent {
 
   public showArtist(artist) {
     this.query = artist.name;
-    artist.highlight = !artist.highlight;
+    artist.highlight = !artist.highlight;   //Highlight the artists that were already choosed
   }
 
   constructor() {
