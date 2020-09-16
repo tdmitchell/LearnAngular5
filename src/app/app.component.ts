@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { empty, EMPTY } from 'rxjs';
 
 
 @Component({
@@ -12,6 +13,7 @@ export class AppComponent implements OnInit {
 
   query: string;
   artists: Object;          //Should be of the Type Artist
+  currentArtist: Object;  //Should be of the Type Artist
 
   constructor(private http: HttpClient) {
     this.query = '';
@@ -24,10 +26,10 @@ export class AppComponent implements OnInit {
       })
   }
 
-  public showArtist(artist) {
-    this.query = artist.name;
-    artist.highlight = !artist.highlight;   //Highlight the artists that were already choosed
+  public showArtist(item) {
+    this.query = item.name;
+    item.highlight = !item.highlight;   //Highlight the artists that were already choosed
+    this.currentArtist = item;          //Defines the selected artist
+    this.query = "";
   }
-
-
 }

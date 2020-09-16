@@ -18,15 +18,16 @@
   <div class="position-absolute container" style="left: 0; z-index:10">
     <div class="row justify-content-center">
       <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5">
-        <div class="list-group">
+        <div class="list-group" *ngIf="query">
           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start"
-             *ngFor="let artist of artists"
+             *ngFor="let artist of (artists | searchArtists: query)"
              (click)="showArtist(artist)"
              [style.backgroundColor]="artist.highlight ? '#EEE' : '#FFF'">
 
-            <!--Adding the information for ALL Artists-->
-            <!--<app-artist-items [artist]="artist"></app-artist-items>-->          <!---------------------NOT WORKING<!--------------------- -->
+            <!--Showing the information (name & reknow) for ALL Artists-->
+            <!--<app-artist-items [artist]="artist"></app-artist-items>-->          <!---------------------NOT WORKING!--------------------- -->
 
+            <!--Should go to artist-items.component.html-->
             <div class="media">
               <img [src]="'./assets/images/' + artist.shortname + '_tn.jpg'" [alt]="'Image from ' + artist.name" class="mr-3 rounded align-self-center img-fluid"
                    style="width:70px;" />
@@ -41,5 +42,26 @@
       </div><!-- col -->
     </div><!-- row -->
   </div><!-- container -->
+
+  <div *ngIf="currentArtist">
+    <!--Showing the detailed information of a selected Artist-->
+    <!--<app-artist-details [artist]="currentArtist"></app-artist-details>-->               <!---------------------NOT WORKING!--------------------- -->
+
+    <!--Should go to artist-details.component.html-->
+    <div class="container mt-3">
+      <div class="row justify-content-center">
+        <div class="col-sm-4 col-lg-3">
+          <img class="img-fluid rounded" src="assets/images/{{currentArtist.shortname}}.jpg" alt="{{currentArtist.name}} photo">
+        </div>
+        <div class="col-sm-8 col-lg-4">
+          <h2 class="mt-3 mt-sm-0 mb-0">{{currentArtist.name}}</h2>
+          <h4 class="mt-0">{{currentArtist.reknown}}</h4>
+          <p>{{currentArtist.bio}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 
 </div><!-- position -->
